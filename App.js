@@ -1,9 +1,10 @@
 import Expo from "expo";
 import React from 'react';
-import { Alert, Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Button, StyleSheet, TextInput, View } from 'react-native';
 import { Container, Content } from 'native-base';
 
 import Head from './ui/Head';
+import Values from './ui/Values';
 
 export default class App extends React.Component {
   constructor(){
@@ -32,23 +33,7 @@ export default class App extends React.Component {
     this.setState({ isReady: true });
   }
 
-  alert(){
-    Alert.alert(
-      'Just saying hi',
-      null,
-      [
-        {text: 'Okay', onPress: () => console.log('pressed Okay')},
-        {text: 'Cancel', onPress: () => console.log('pressed Cancel')}
-      ]
-    )
-  }
-
   render() {
-    let tip = '0.00';
-    if (this.state.inputValue){
-      tip = parseFloat(this.state.inputValue) * this.state.tipPercentage;
-      tip = (Math.round(tip * 100) / 100).toFixed(2);
-    }
 
     if (!this.state.isReady) {
       return <Expo.AppLoading />;
@@ -57,47 +42,43 @@ export default class App extends React.Component {
     return (
       <Container>
         <Head />
-        <Content padder>
-          <View style={styles.container}>
-          <Button
-            title="Alert"
-            onPress={this.alert}
-          />
-            <Text>
-              ${tip}
-            </Text>
-            <TextInput
-              value={this.state.inputValue}
-              keyboardType='numeric'
-              style={styles.input}
-              placeholder='0.00'
-              underlineColorAndroid={'transparent'}
-              onChangeText={text => this.setState({inputValue: text})}
-            />
-            <View style={styles.buttonGroup}>
-              <Button
-                title="10%"
-                onPress={() => this.setState({tipPercentage: 0.1})}
-              />
-              <Button
-                title="15%"
-                onPress={() => this.setState({tipPercentage: 0.15})}
-              />
-              <Button
-                title="20%"
-                onPress={() => this.setState({tipPercentage: 0.2})}
-              />
-              <TextInput 
-                value={(this.state.tipPercentage * 100).toString()}
+        <View style={styles.container}>
+          <Content style={{ width: '100%' }}>
+            <Values tipPercentage={this.state.tipPercentage} inputValue={this.state.inputValue} />
+            <View style={styles.inputs}>
+              <TextInput
+                value={this.state.inputValue}
                 keyboardType='numeric'
-                placeholder='20%'
-                style={styles.customTip}
+                style={styles.input}
+                placeholder='0.00'
                 underlineColorAndroid={'transparent'}
-                onChangeText={customTip => this.updateCustomTip(customTip)}
+                onChangeText={text => this.setState({inputValue: text})}
               />
+              <View style={styles.buttonGroup}>
+                <Button
+                  title="10%"
+                  onPress={() => this.setState({tipPercentage: 0.1})}
+                />
+                <Button
+                  title="15%"
+                  onPress={() => this.setState({tipPercentage: 0.15})}
+                />
+                <Button
+                  title="20%"
+                  onPress={() => this.setState({tipPercentage: 0.2})}
+                />
+                <TextInput 
+                  value={(this.state.tipPercentage * 100).toString()}
+                  keyboardType='numeric'
+                  placeholder='20%'
+                  style={styles.customTip}
+                  underlineColorAndroid={'transparent'}
+                  onChangeText={customTip => this.updateCustomTip(customTip)}
+                />
+              </View>
             </View>
-          </View>
-        </Content>
+          </Content>
+        </View>
       </Container>
     );
   }
@@ -106,24 +87,29 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFF',
-    alignItems: 'center'
+    backgroundColor: '#000',
+    alignItems: 'center',
+    height: '100%',
+    width: '100%'
+  },
+  inputs: {
+    backgroundColor: '#212121',
+    padding: 20
   },
   input: {
     height: 40,
     width: '100%',
-    borderColor: '#333',
-    borderWidth: 1,
     padding: 5,
+    color: '#FFF'
   },
   customTip: {
-    height: 30,
+    height: 40,
     width: 60,
-    borderColor: '#333',
-    borderWidth: 1,
     padding: 5,
+    color: '#FFF'
   },
   buttonGroup: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   }
 });
