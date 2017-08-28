@@ -1,3 +1,4 @@
+import Expo from "expo";
 import React from 'react';
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 import { Container, Content, Header, Left, Body, Right, Title } from 'native-base';
@@ -8,6 +9,7 @@ export default class App extends React.Component {
     this.state = {
       inputValue: '',
       tipPercentage: 0.2,
+      isReady: false
     }
   }
 
@@ -19,12 +21,26 @@ export default class App extends React.Component {
     }
   }
 
+  async componentWillMount() {
+    await Expo.Font.loadAsync({
+      'Roboto': require('native-base/Fonts/Roboto.ttf'),
+      'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
+    });
+
+    this.setState({ isReady: true });
+  }
+
   render() {
     let tip = '0.00';
     if (this.state.inputValue){
       tip = parseFloat(this.state.inputValue) * this.state.tipPercentage;
       tip = (Math.round(tip * 100) / 100).toFixed(2);
     }
+
+    if (!this.state.isReady) {
+      return <Expo.AppLoading />;
+    }
+
     return (
       <Container>
         <Header>
