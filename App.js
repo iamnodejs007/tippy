@@ -1,7 +1,9 @@
 import Expo from "expo";
 import React from 'react';
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
-import { Container, Content, Header, Left, Body, Right, Title } from 'native-base';
+import { Alert, Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Container, Content } from 'native-base';
+
+import Head from './ui/Head';
 
 export default class App extends React.Component {
   constructor(){
@@ -30,6 +32,17 @@ export default class App extends React.Component {
     this.setState({ isReady: true });
   }
 
+  alert(){
+    Alert.alert(
+      'Just saying hi',
+      null,
+      [
+        {text: 'Okay', onPress: () => console.log('pressed Okay')},
+        {text: 'Cancel', onPress: () => console.log('pressed Cancel')}
+      ]
+    )
+  }
+
   render() {
     let tip = '0.00';
     if (this.state.inputValue){
@@ -43,15 +56,13 @@ export default class App extends React.Component {
 
     return (
       <Container>
-        <Header>
-          <Left/>
-          <Body>
-            <Title>Header</Title>
-          </Body>
-          <Right />
-        </Header>
+        <Head />
         <Content padder>
           <View style={styles.container}>
+          <Button
+            title="Alert"
+            onPress={this.alert}
+          />
             <Text>
               ${tip}
             </Text>
