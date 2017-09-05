@@ -1,7 +1,7 @@
 import Expo from "expo";
 import React from 'react';
 import { Button, StyleSheet, TextInput, View } from 'react-native';
-import { Container, Content } from 'native-base';
+import { Container, Content, Form, Item, Input, Label } from 'native-base';
 
 import Head from './ui/Head';
 import Values from './ui/Values';
@@ -45,16 +45,22 @@ export default class App extends React.Component {
         <View style={styles.container}>
           <Content style={{ width: '100%' }}>
             <Values tipPercentage={this.state.tipPercentage} inputValue={this.state.inputValue} />
+
+            <Form>
+              <Item stackedLabel>
+                <Label>Bill Amount</Label>
+                <Input 
+                  value={this.state.inputValue}
+                  keyboardType='numeric'
+                  placeholder='0.00'
+                  clearButtonMode='always'
+                  underlineColorAndroid={'transparent'}
+                  onChangeText={text => this.setState({inputValue: text})}
+                />
+              </Item>
+            </Form>
+
             <View style={styles.inputs}>
-              <TextInput
-                value={this.state.inputValue}
-                keyboardType='numeric'
-                style={styles.input}
-                placeholder='0.00'
-                placeholderTextColor='#FFF'
-                underlineColorAndroid={'transparent'}
-                onChangeText={text => this.setState({inputValue: text})}
-              />
               <View style={styles.buttonGroup}>
                 <Button
                   title="10%"
@@ -88,13 +94,13 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000',
+    backgroundColor: '#FFF',
     alignItems: 'center',
     height: '100%',
     width: '100%'
   },
   inputs: {
-    backgroundColor: '#212121',
+    backgroundColor: '#666',
     padding: 20
   },
   input: {
