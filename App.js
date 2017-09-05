@@ -51,6 +51,7 @@ export default class App extends React.Component {
                 keyboardType='numeric'
                 style={styles.input}
                 placeholder='0.00'
+                placeholderTextColor='#FFF'
                 underlineColorAndroid={'transparent'}
                 onChangeText={text => this.setState({inputValue: text})}
               />
