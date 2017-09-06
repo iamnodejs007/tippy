@@ -1,7 +1,7 @@
 import Expo from "expo";
 import React from 'react';
-import { Button, StyleSheet, Text, TextInput, View, Slider } from 'react-native';
-import { Container, Content, Form, Item, Input, Label } from 'native-base';
+import { StyleSheet, TextInput, View, Slider } from 'react-native';
+import { Button, Text, Container, Content, Form, Item, Input, Label } from 'native-base';
 
 import Head from './ui/Head';
 import Values from './ui/Values';
@@ -58,18 +58,15 @@ export default class App extends React.Component {
 
             <View style={styles.inputs}>
               <View style={styles.buttonGroup}>
-                <Button
-                  title="10%"
-                  onPress={() => this.setState({tipPercentage: 0.1})}
-                />
-                <Button
-                  title="15%"
-                  onPress={() => this.setState({tipPercentage: 0.15})}
-                />
-                <Button
-                  title="20%"
-                  onPress={() => this.setState({tipPercentage: 0.2})}
-                />
+                <Button bordered onPress={() => this.setState({tipPercentage: 0.1})}>
+                  <Text>10%</Text>
+                </Button>
+                <Button bordered onPress={() => this.setState({tipPercentage: 0.15})}>
+                  <Text>15%</Text>
+                </Button>
+                <Button bordered onPress={() => this.setState({tipPercentage: 0.2})}>
+                  <Text>20%</Text>
+                </Button>
               </View>
             </View>
             <Text>
