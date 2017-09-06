@@ -1,6 +1,6 @@
 import Expo from "expo";
 import React from 'react';
-import { Button, StyleSheet, TextInput, View } from 'react-native';
+import { Button, StyleSheet, Text, TextInput, View, Slider } from 'react-native';
 import { Container, Content, Form, Item, Input, Label } from 'native-base';
 
 import Head from './ui/Head';
@@ -16,12 +16,8 @@ export default class App extends React.Component {
     }
   }
 
-  updateCustomTip(customTip){
-    if (customTip) {
-      this.setState({tipPercentage: parseFloat(customTip) / 100});
-    } else {
-      this.setState({tipPercentage: 0})
-    }
+  percentageSlider(sliderValue){
+    this.setState({tipPercentage: parseFloat(sliderValue) / 100});
   }
 
   async componentWillMount() {
@@ -74,16 +70,17 @@ export default class App extends React.Component {
                   title="20%"
                   onPress={() => this.setState({tipPercentage: 0.2})}
                 />
-                <TextInput 
-                  value={(this.state.tipPercentage * 100).toString()}
-                  keyboardType='numeric'
-                  placeholder='20%'
-                  style={styles.customTip}
-                  underlineColorAndroid={'transparent'}
-                  onChangeText={customTip => this.updateCustomTip(customTip)}
-                />
               </View>
             </View>
+            <Text>
+              Tip Percentage: {(this.state.tipPercentage * 100).toFixed()}%
+            </Text>
+            <Slider 
+              value={this.state.tipPercentage * 100}
+              maximumValue={100}
+              onValueChange={sliderValue => this.percentageSlider(sliderValue)}
+              step={5}
+            />
           </Content>
         </View>
       </Container>
@@ -100,18 +97,12 @@ const styles = StyleSheet.create({
     width: '100%'
   },
   inputs: {
-    backgroundColor: '#666',
+    backgroundColor: '#FFF',
     padding: 20
   },
   input: {
     height: 40,
     width: '100%',
-    padding: 5,
-    color: '#FFF'
-  },
-  customTip: {
-    height: 40,
-    width: 60,
     padding: 5,
     color: '#FFF'
   },
