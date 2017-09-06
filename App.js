@@ -100,12 +100,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF',
     padding: 20
   },
-  input: {
-    height: 40,
-    width: '100%',
-    padding: 5,
-    color: '#FFF'
-  },
   buttonGroup: {
     flexDirection: 'row',
     justifyContent: 'space-between'
