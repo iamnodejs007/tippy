@@ -1,6 +1,6 @@
 import Expo from "expo";
 import React from 'react';
-import { StyleSheet, TextInput, View, Slider } from 'react-native';
+import { StyleSheet, TextInput, View, Slider, Switch } from 'react-native';
 import { Button, Text, Container, Content, Form, Item, Input, Label } from 'native-base';
 
 import Head from './ui/Head';
@@ -12,12 +12,22 @@ export default class App extends React.Component {
     this.state = {
       inputValue: '',
       tipPercentage: 0.2,
-      isReady: false
+      isReady: false,
+      split: false,
+      splitValue: 2
     }
   }
 
   percentageSlider(sliderValue){
     this.setState({tipPercentage: parseFloat(sliderValue) / 100});
+  }
+
+  splitToggle(switchValue){
+    this.setState({split: switchValue});
+  }
+
+  splitSlider(switchValue){
+    this.setState({splitValue: switchValue});
   }
 
   async componentWillMount() {
@@ -40,7 +50,7 @@ export default class App extends React.Component {
         <Head />
         <View style={styles.container}>
           <Content style={{ width: '100%' }}>
-            <Values tipPercentage={this.state.tipPercentage} inputValue={this.state.inputValue} />
+            <Values tipPercentage={this.state.tipPercentage} inputValue={this.state.inputValue} split={this.state.split} splitValue={this.state.splitValue} />
 
             <Form>
               <Item stackedLabel>
@@ -77,6 +87,21 @@ export default class App extends React.Component {
               maximumValue={100}
               onValueChange={sliderValue => this.percentageSlider(sliderValue)}
               step={5}
+            />
+            <Text>
+              Split: {this.state.split ? this.state.splitValue.toString() : 'False'}
+            </Text>
+            <Switch 
+              value={this.state.split}
+              onValueChange={switchValue => this.splitToggle(switchValue)}
+            />
+            <Slider 
+              disabled={!this.state.split}
+              value={this.state.splitValue}
+              minimumValue={2}
+              maximumValue={10}
+              step={1}
+              onValueChange={sliderValue => this.splitSlider(sliderValue)}
             />
           </Content>
         </View>

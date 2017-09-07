@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 
-const Values = ({ tipPercentage, inputValue }) => {
+const Values = ({ tipPercentage, inputValue, split, splitValue }) => {
   let tip = '0.00';
   let total = '0.00';
+  let perPerson = '0.00';
+
   if (inputValue){
     tip = parseFloat(inputValue) * tipPercentage;
     total = parseFloat(inputValue) + tip;
     tip = (Math.round(tip * 100) / 100).toFixed(2);
     total = (Math.round(total * 100) / 100).toFixed(2);
+    if (split){
+      perPerson = (total / splitValue).toFixed(2);
+    }
   }
 
   return(
@@ -18,6 +23,7 @@ const Values = ({ tipPercentage, inputValue }) => {
 
       <Text style={styles.label}>Total Bill</Text>
       <Text style={styles.total}>${total}</Text>
+      {split && <Text>Each: ${perPerson}</Text>}
     </View>
   );
 }
