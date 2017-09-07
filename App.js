@@ -1,7 +1,7 @@
 import Expo from "expo";
 import React from 'react';
-import { StyleSheet, TextInput, View, Slider, Switch } from 'react-native';
-import { Button, Text, Container, Content, Form, Item, Input, Label } from 'native-base';
+import { StyleSheet, View, Slider } from 'react-native';
+import { Text, Container, Content, Form, Item, Input, Label } from 'native-base';
 
 import Head from './ui/Head';
 import Values from './ui/Values';
@@ -13,8 +13,7 @@ export default class App extends React.Component {
       inputValue: '',
       tipPercentage: 0.2,
       isReady: false,
-      split: false,
-      splitValue: 2
+      splitValue: 0
     }
   }
 
@@ -22,12 +21,8 @@ export default class App extends React.Component {
     this.setState({tipPercentage: parseFloat(sliderValue) / 100});
   }
 
-  splitToggle(switchValue){
-    this.setState({split: switchValue});
-  }
-
-  splitSlider(switchValue){
-    this.setState({splitValue: switchValue});
+  splitSlider(sliderValue){
+    this.setState({splitValue: sliderValue});
   }
 
   async componentWillMount() {
@@ -50,7 +45,7 @@ export default class App extends React.Component {
         <Head />
         <View style={styles.container}>
           <Content style={{ width: '100%' }}>
-            <Values tipPercentage={this.state.tipPercentage} inputValue={this.state.inputValue} split={this.state.split} splitValue={this.state.splitValue} />
+            <Values tipPercentage={this.state.tipPercentage} inputValue={this.state.inputValue} splitValue={this.state.splitValue} />
 
             <Form>
               <Item stackedLabel>
@@ -65,41 +60,28 @@ export default class App extends React.Component {
                   onChangeText={text => this.setState({inputValue: text})}
                 />
               </Item>
+              <Item stackedLabel>
+                <Label>Tip</Label>
+                <Text>
+                  {(this.state.tipPercentage * 100).toFixed()}%
+                </Text>
+              </Item>
             </Form>
 
-            <View style={styles.inputs}>
-              <View style={styles.buttonGroup}>
-                <Button bordered onPress={() => this.setState({tipPercentage: 0.1})}>
-                  <Text>10%</Text>
-                </Button>
-                <Button bordered onPress={() => this.setState({tipPercentage: 0.15})}>
-                  <Text>15%</Text>
-                </Button>
-                <Button bordered onPress={() => this.setState({tipPercentage: 0.2})}>
-                  <Text>20%</Text>
-                </Button>
-              </View>
-            </View>
-            <Text>
-              Tip Percentage: {(this.state.tipPercentage * 100).toFixed()}%
-            </Text>
             <Slider 
               value={this.state.tipPercentage * 100}
               maximumValue={100}
               onValueChange={sliderValue => this.percentageSlider(sliderValue)}
               step={5}
             />
+            
             <Text>
-              Split: {this.state.split ? this.state.splitValue.toString() : 'No'}
+              Split: {this.state.splitValue.toString()}
             </Text>
-            <Switch 
-              value={this.state.split}
-              onValueChange={switchValue => this.splitToggle(switchValue)}
-            />
+
             <Slider 
-              disabled={!this.state.split}
               value={this.state.splitValue}
-              minimumValue={2}
+              minimumValue={0}
               maximumValue={20}
               step={1}
               onValueChange={sliderValue => this.splitSlider(sliderValue)}
@@ -118,13 +100,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: '100%',
     width: '100%'
-  },
-  inputs: {
-    backgroundColor: '#FFF',
-    padding: 20
-  },
-  buttonGroup: {
-    flexDirection: 'row',
-    justifyContent: 'space-between'
   }
 });
