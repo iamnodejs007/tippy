@@ -58,6 +58,7 @@ export default class App extends React.Component {
                 <Input 
                   value={this.state.inputValue}
                   keyboardType='numeric'
+                  autoFocus={true}
                   placeholder='0.00'
                   clearButtonMode='always'
                   underlineColorAndroid={'transparent'}
@@ -89,7 +90,7 @@ export default class App extends React.Component {
               step={5}
             />
             <Text>
-              Split: {this.state.split ? this.state.splitValue.toString() : 'False'}
+              Split: {this.state.split ? this.state.splitValue.toString() : 'No'}
             </Text>
             <Switch 
               value={this.state.split}
@@ -99,7 +100,7 @@ export default class App extends React.Component {
               disabled={!this.state.split}
               value={this.state.splitValue}
               minimumValue={2}
-              maximumValue={10}
+              maximumValue={20}
               step={1}
               onValueChange={sliderValue => this.splitSlider(sliderValue)}
             />
