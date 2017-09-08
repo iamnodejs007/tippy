@@ -76,7 +76,7 @@ export default class App extends Component {
           <View style={styles.section}>
             <StyledText style={styles.header}>Bill Amount</StyledText>
             <TextInput 
-              style={styles.text}
+              style={styles.bigText}
               value={this.state.inputValue}
               keyboardType='numeric'
               autoFocus={true}
@@ -89,7 +89,7 @@ export default class App extends Component {
 
           <View style={styles.section}>
             <Text style={styles.header}>Tip</Text>
-            <StyledText>${tip}</StyledText>
+            <StyledText style={styles.bigText}>${tip}</StyledText>
             <StyledText>
               {(this.state.tipPercentage * 100).toFixed()}%
             </StyledText>
@@ -103,12 +103,12 @@ export default class App extends Component {
 
           <View style={styles.section}>
             <Text style={styles.header}>Total</Text>
-            <StyledText>${total}</StyledText>
+            <StyledText style={styles.bigText}>${total}</StyledText>
           </View>
           
           <View style={styles.section}>
             <Text style={styles.header}>Split</Text>
-            <StyledText>{this.state.splitValue.toString()}</StyledText>
+            <StyledText style={styles.bigText}>{this.state.splitValue.toString()}</StyledText>
 
             <Slider 
               value={this.state.splitValue}
@@ -123,7 +123,7 @@ export default class App extends Component {
             splitValue !== 0 && 
             <View style={styles.section}>
               <Text style={styles.header}>Per Person</Text>
-              <StyledText>${perPerson}</StyledText>
+              <StyledText style={styles.bigText}>${perPerson}</StyledText>
             </View>
           }
         </ScrollView>
@@ -133,22 +133,28 @@ export default class App extends Component {
   }
 }
 
+const textColor = '#FFF';
+const bigFontSize = 30;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: 'linear-gradient(to right, #2980b9, #2c3e50)',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    // padding: 10,
+    padding: 10,
   },
   section:{
     marginBottom: 25
   },
   header:{
     fontWeight: 'bold',
-    color: '#FFF'
+    color: textColor
   },
   text:{
-    color: '#FFF'
+    color: textColor
+  },
+  bigText:{
+    color: textColor,
+    fontSize: bigFontSize
   },
   gradient:{
     position: 'absolute',
