@@ -4,7 +4,6 @@ import { StyleSheet, View, Slider } from 'react-native';
 import { Text, Container, Content, Form, Item, Input, Label } from 'native-base';
 
 import Head from './ui/Head';
-import Values from './ui/Values';
 
 export default class App extends React.Component {
   constructor(){
@@ -40,12 +39,32 @@ export default class App extends React.Component {
       return <Expo.AppLoading />;
     }
 
+    let tip = '0.00';
+    let total = '0.00';
+    let perPerson = '0.00';
+    
+    let inputValue = this.state.inputValue;
+    let tipPercentage = this.state.tipPercentage;
+    let splitValue = this.state.splitValue;
+  
+    if (inputValue){
+      tip = parseFloat(inputValue) * tipPercentage;
+      total = parseFloat(inputValue) + tip;
+      tip = (Math.round(tip * 100) / 100).toFixed(2);
+      total = (Math.round(total * 100) / 100).toFixed(2);
+      if (splitValue !== 0){
+        perPerson = (total / splitValue).toFixed(2);
+      }
+    }
+
     return (
       <Container>
         <Head />
         <View style={styles.container}>
           <Content style={{ width: '100%' }}>
-            <Values tipPercentage={this.state.tipPercentage} inputValue={this.state.inputValue} splitValue={this.state.splitValue} />
+            <Text>Tip: ${tip}</Text>
+            <Text>Total: ${total}</Text>
+            {splitValue !== 0 && <Text>Each: ${perPerson}</Text>}
 
             <Form>
               <Item stackedLabel>
