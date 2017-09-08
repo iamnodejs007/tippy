@@ -62,69 +62,65 @@ export default class App extends React.Component {
       <Container>
         <LinearGradient
           colors={['#2980b9', '#2c3e50']}
-          style={{
-            position: 'absolute',
-            left: 0,
-            right: 0,
-            top: 0,
-            height: '100%',
-          }}
+          start={[0.25 , 0]}
+          style={styles.gradient}
         />
+
         <Head />
 
-          <ScrollView style={styles.container}>
-            <View style={styles.section}>
-              <Text style={styles.header}>Bill Amount</Text>
-              <TextInput 
-                value={this.state.inputValue}
-                keyboardType='numeric'
-                autoFocus={true}
-                placeholder='0.00'
-                clearButtonMode='always'
-                underlineColorAndroid={'transparent'}
-                onChangeText={text => this.setState({inputValue: text})}
-              />
-            </View>
+        <ScrollView style={styles.container}>
+          <View style={styles.section}>
+            <Text style={styles.header}>Bill Amount</Text>
+            <TextInput 
+              value={this.state.inputValue}
+              keyboardType='numeric'
+              autoFocus={true}
+              placeholder='0.00'
+              clearButtonMode='always'
+              underlineColorAndroid={'transparent'}
+              onChangeText={text => this.setState({inputValue: text})}
+            />
+          </View>
 
-            <View style={styles.section}>
-              <Text style={styles.header}>Tip</Text>
-              <Text>${tip}</Text>
-              <Text>
-                {(this.state.tipPercentage * 100).toFixed()}%
-              </Text>
-              <Slider 
-                value={this.state.tipPercentage * 100}
-                maximumValue={100}
-                onValueChange={sliderValue => this.percentageSlider(sliderValue)}
-                step={5}
-              />
-            </View>
+          <View style={styles.section}>
+            <Text style={styles.header}>Tip</Text>
+            <Text>${tip}</Text>
+            <Text>
+              {(this.state.tipPercentage * 100).toFixed()}%
+            </Text>
+            <Slider 
+              value={this.state.tipPercentage * 100}
+              maximumValue={100}
+              onValueChange={sliderValue => this.percentageSlider(sliderValue)}
+              step={5}
+            />
+          </View>
 
-            <View style={styles.section}>
-              <Text style={styles.header}>Total</Text>
-              <Text>${total}</Text>
-            </View>
-            
-            <View style={styles.section}>
-              <Text style={styles.header}>Split</Text>
-              <Text>{this.state.splitValue.toString()}</Text>
+          <View style={styles.section}>
+            <Text style={styles.header}>Total</Text>
+            <Text>${total}</Text>
+          </View>
+          
+          <View style={styles.section}>
+            <Text style={styles.header}>Split</Text>
+            <Text>{this.state.splitValue.toString()}</Text>
 
-              <Slider 
-                value={this.state.splitValue}
-                minimumValue={0}
-                maximumValue={20}
-                step={1}
-                onValueChange={sliderValue => this.splitSlider(sliderValue)}
-              />
-            </View>
+            <Slider 
+              value={this.state.splitValue}
+              minimumValue={0}
+              maximumValue={20}
+              step={1}
+              onValueChange={sliderValue => this.splitSlider(sliderValue)}
+            />
+          </View>
 
-            {
-              splitValue !== 0 && 
-              <View style={styles.section}>
-                <Text style={styles.header}>Per Person</Text>
-                <Text>${perPerson}</Text>
-              </View>
-            }
+          {
+            splitValue !== 0 && 
+            <View style={styles.section}>
+              <Text style={styles.header}>Per Person</Text>
+              <Text>${perPerson}</Text>
+            </View>
+          }
         </ScrollView>
 
       </Container>
@@ -144,5 +140,12 @@ const styles = StyleSheet.create({
   },
   header:{
     fontWeight: 'bold',
+  },
+  gradient:{
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    height: '100%',
   }
 });
