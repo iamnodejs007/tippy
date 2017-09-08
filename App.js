@@ -1,12 +1,16 @@
 import Expo from "expo";
-import React from 'react';
+import React, { Component } from 'react';
 import { TextInput, StyleSheet, View, ScrollView, Slider } from 'react-native';
 import { Text, Container, Content } from 'native-base';
 import { LinearGradient } from 'expo';
 
 import Head from './ui/Head';
 
-export default class App extends React.Component {
+const StyledText = ({style = styles.text, children}) => (
+  <Text style={style}>{children}</Text>
+)
+
+export default class App extends Component {
   constructor(){
     super();
     this.state = {
@@ -70,8 +74,9 @@ export default class App extends React.Component {
 
         <ScrollView style={styles.container}>
           <View style={styles.section}>
-            <Text style={styles.header}>Bill Amount</Text>
+            <StyledText style={styles.header}>Bill Amount</StyledText>
             <TextInput 
+              style={styles.text}
               value={this.state.inputValue}
               keyboardType='numeric'
               autoFocus={true}
@@ -84,10 +89,10 @@ export default class App extends React.Component {
 
           <View style={styles.section}>
             <Text style={styles.header}>Tip</Text>
-            <Text>${tip}</Text>
-            <Text>
+            <StyledText>${tip}</StyledText>
+            <StyledText>
               {(this.state.tipPercentage * 100).toFixed()}%
-            </Text>
+            </StyledText>
             <Slider 
               value={this.state.tipPercentage * 100}
               maximumValue={100}
@@ -98,12 +103,12 @@ export default class App extends React.Component {
 
           <View style={styles.section}>
             <Text style={styles.header}>Total</Text>
-            <Text>${total}</Text>
+            <StyledText>${total}</StyledText>
           </View>
           
           <View style={styles.section}>
             <Text style={styles.header}>Split</Text>
-            <Text>{this.state.splitValue.toString()}</Text>
+            <StyledText>{this.state.splitValue.toString()}</StyledText>
 
             <Slider 
               value={this.state.splitValue}
@@ -118,7 +123,7 @@ export default class App extends React.Component {
             splitValue !== 0 && 
             <View style={styles.section}>
               <Text style={styles.header}>Per Person</Text>
-              <Text>${perPerson}</Text>
+              <StyledText>${perPerson}</StyledText>
             </View>
           }
         </ScrollView>
@@ -132,7 +137,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     // backgroundColor: 'linear-gradient(to right, #2980b9, #2c3e50)',
-    backgroundColor: 'transparent',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
     // padding: 10,
   },
   section:{
@@ -140,6 +145,10 @@ const styles = StyleSheet.create({
   },
   header:{
     fontWeight: 'bold',
+    color: '#FFF'
+  },
+  text:{
+    color: '#FFF'
   },
   gradient:{
     position: 'absolute',
