@@ -80,7 +80,9 @@ export default class App extends Component {
               value={this.state.inputValue}
               keyboardType='numeric'
               autoFocus={true}
+              selectionColor='white'
               placeholder='0.00'
+              placeholderTextColor='rgba(255,255,255,0.5)'
               clearButtonMode='always'
               underlineColorAndroid={'transparent'}
               onChangeText={text => this.setState({inputValue: text})}
@@ -90,7 +92,7 @@ export default class App extends Component {
           {this.state.inputValue !== '' && 
           <View>
           <View style={styles.section}>
-            <View style={styles.headerWrapper}>
+            <View style={styles.flexWrapper}>
               <Text style={styles.header}>Tip</Text>
               <StyledText>
                 {(this.state.tipPercentage * 100).toFixed()}%
@@ -102,16 +104,27 @@ export default class App extends Component {
               maximumValue={100}
               onValueChange={sliderValue => this.percentageSlider(sliderValue)}
               step={5}
+              minimumTrackTintColor='white'
+              maximumTrackTintColor='rgba(255,255,255,0.5)'
             />
           </View>
 
-          <View style={styles.section}>
-            <Text style={styles.header}>Total</Text>
-            <StyledText style={styles.bigText}>${total}</StyledText>
+          <View style={[styles.section, styles.flexWrapper]}>
+            <View>
+              <Text style={styles.header}>Total</Text>
+              <StyledText style={styles.bigText}>${total}</StyledText>
+            </View>
+            {
+              splitValue !== 0 && 
+              <View>
+                    <Text style={[styles.header, {textAlign: 'right'}]}>Per Person</Text>
+                    <StyledText style={[styles.bigText, {textAlign: 'right'}]}>${perPerson}</StyledText>
+              </View>
+            }
           </View>
           
           <View style={styles.section}>
-            <View style={styles.headerWrapper}>
+            <View style={styles.flexWrapper}>
               <Text style={styles.header}>Split</Text>
               <StyledText>{this.state.splitValue.toString()}</StyledText>
             </View>
@@ -121,17 +134,13 @@ export default class App extends Component {
               minimumValue={0}
               maximumValue={20}
               step={1}
+              minimumTrackTintColor='white'
+              maximumTrackTintColor='rgba(255,255,255,0.5)'
               onValueChange={sliderValue => this.splitSlider(sliderValue)}
             />
           </View>
 
-          {
-            splitValue !== 0 && 
-            <View style={styles.section}>
-              <Text style={styles.header}>Per Person</Text>
-              <StyledText style={styles.bigText}>${perPerson}</StyledText>
-            </View>
-          }
+          
           </View>
           }
         </ScrollView>
@@ -153,7 +162,7 @@ const styles = StyleSheet.create({
   section:{
     marginBottom: 25
   },
-  headerWrapper:{
+  flexWrapper:{
     flexDirection: 'row',
     justifyContent: 'space-between'
   },

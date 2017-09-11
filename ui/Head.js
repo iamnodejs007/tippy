@@ -3,8 +3,8 @@ import { StyleSheet, View, StatusBar, Platform } from 'react-native';
 import { Header, Left, Body, Right, Title } from 'native-base';
 
 const Head = () => (
-  <View style={styles.header}>
-    <Header>
+  <View style={styles.headerView}>
+    <Header style={styles.header}>
       <Left/>
       <Body>
         <Title>Tip Calculator</Title>
@@ -15,12 +15,15 @@ const Head = () => (
 )
 
 const styles = StyleSheet.create({
-  header: {
+  headerView: {
     ...Platform.select({
       android: {
         marginTop: StatusBar.currentHeight,
       }
     })
+  },
+  header:{
+    backgroundColor: 'rgba(255, 255, 255, 0.9)'
   }
 });
 
