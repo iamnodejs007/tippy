@@ -1,10 +1,8 @@
 import Expo from "expo";
 import React, { Component } from 'react';
-import { TextInput, StyleSheet, View, ScrollView, Slider } from 'react-native';
+import { TextInput, StyleSheet, View, Slider, StatusBar } from 'react-native';
 import { Text, Container, Content } from 'native-base';
 import { LinearGradient } from 'expo';
-
-import Head from './ui/Head';
 
 const StyledText = ({style = styles.text, children}) => (
   <Text style={style}>{children}</Text>
@@ -70,9 +68,9 @@ export default class App extends Component {
           style={styles.gradient}
         />
 
-        <Head />
+        <StatusBar barStyle="light-content" />
 
-        <ScrollView style={styles.container}>
+        <View style={styles.container}>
           <View style={styles.section}>
             <StyledText style={styles.header}>Bill Amount</StyledText>
             <TextInput 
@@ -106,6 +104,7 @@ export default class App extends Component {
               step={5}
               minimumTrackTintColor='white'
               maximumTrackTintColor='rgba(255,255,255,0.5)'
+              thumbTintColor='white'
             />
           </View>
 
@@ -136,6 +135,7 @@ export default class App extends Component {
               step={1}
               minimumTrackTintColor='white'
               maximumTrackTintColor='rgba(255,255,255,0.5)'
+              thumbTintColor='white'
               onValueChange={sliderValue => this.splitSlider(sliderValue)}
             />
           </View>
@@ -143,7 +143,7 @@ export default class App extends Component {
           
           </View>
           }
-        </ScrollView>
+        </View>
 
       </Container>
     );
@@ -158,6 +158,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     padding: 10,
+    paddingTop: 40
   },
   section:{
     marginBottom: 25
