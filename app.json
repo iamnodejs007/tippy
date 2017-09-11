@@ -4,6 +4,9 @@
     "description": "Tip Calculator",
     "slug": "tippy",
     "sdkVersion": "19.0.0",
-    "orientation": "portrait"
+    "orientation": "portrait",
+    "android": {
+      "package": "com.mattj.tippy"
+    }
   }
 }
