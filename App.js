@@ -87,12 +87,16 @@ export default class App extends Component {
             />
           </View>
 
+          {this.state.inputValue !== '' && 
+          <View>
           <View style={styles.section}>
-            <Text style={styles.header}>Tip</Text>
+            <View style={styles.headerWrapper}>
+              <Text style={styles.header}>Tip</Text>
+              <StyledText>
+                {(this.state.tipPercentage * 100).toFixed()}%
+              </StyledText>
+            </View>
             <StyledText style={styles.bigText}>${tip}</StyledText>
-            <StyledText>
-              {(this.state.tipPercentage * 100).toFixed()}%
-            </StyledText>
             <Slider 
               value={this.state.tipPercentage * 100}
               maximumValue={100}
@@ -107,8 +111,10 @@ export default class App extends Component {
           </View>
           
           <View style={styles.section}>
-            <Text style={styles.header}>Split</Text>
-            <StyledText style={styles.bigText}>{this.state.splitValue.toString()}</StyledText>
+            <View style={styles.headerWrapper}>
+              <Text style={styles.header}>Split</Text>
+              <StyledText>{this.state.splitValue.toString()}</StyledText>
+            </View>
 
             <Slider 
               value={this.state.splitValue}
@@ -125,6 +131,8 @@ export default class App extends Component {
               <Text style={styles.header}>Per Person</Text>
               <StyledText style={styles.bigText}>${perPerson}</StyledText>
             </View>
+          }
+          </View>
           }
         </ScrollView>
 
@@ -144,6 +152,10 @@ const styles = StyleSheet.create({
   },
   section:{
     marginBottom: 25
+  },
+  headerWrapper:{
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   },
   header:{
     fontWeight: 'bold',
