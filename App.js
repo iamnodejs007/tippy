@@ -158,10 +158,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     padding: 10,
-    paddingTop: 40
+    paddingTop: 25
   },
   section:{
-    marginBottom: 25
+    marginBottom: 20
   },
   flexWrapper:{
     flexDirection: 'row',
