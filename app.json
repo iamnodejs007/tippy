@@ -3,10 +3,16 @@
     "name": "Tippy",
     "description": "Tip Calculator",
     "slug": "tippy",
+    "version": "1.0.0",
+    "icon": "icon.png",
     "sdkVersion": "19.0.0",
     "orientation": "portrait",
     "android": {
       "package": "com.mattj.tippy"
+    },
+    "loading": {
+      "backgroundColor": "#184C6F",
+      "icon": "logo.png"
     }
   }
 }
