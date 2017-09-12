@@ -3,4 +3,4 @@
 A tip calculator built with React Native.
 
 
-![Tippy Logo](logo.png?raw=true "Tippy Logo")
+![Tippy Icon](icon.png?raw=true "Tippy Icon")
