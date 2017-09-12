@@ -3,4 +3,6 @@
 A tip calculator built with React Native.
 
 
-![Tippy Icon](icon.png?raw=true "Tippy Icon")
+![Tippy Launch Screen](launch-screen.png?raw=true "Tippy Launch Screen")
+
+![Tippy Screenshot](screenshot.png?raw=true "Tippy Screenshot")
