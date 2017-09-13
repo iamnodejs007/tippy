@@ -1,6 +1,6 @@
 import Expo from "expo";
 import React, { Component } from 'react';
-import { TextInput, StyleSheet, View, Slider, StatusBar } from 'react-native';
+import { TextInput, Platform, StyleSheet, View, Slider, StatusBar } from 'react-native';
 import { Text, Container, Content } from 'native-base';
 import { LinearGradient } from 'expo';
 
@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     padding: 10,
-    paddingTop: 25
+    paddingTop: (Platform.OS === 'android') ? 40 : 25,
   },
   section:{
     marginBottom: 20
